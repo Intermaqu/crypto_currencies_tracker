@@ -1,0 +1,41 @@
+.coin-select-wrapper{
+  width: 100%;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.tableElement{
+  height: fit-content;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+}
+
+.tableCol{
+  width: 300px;
+  cursor: pointer;
+}
+
+.tableCol button{
+  cursor: pointer;
+}
+
+.tableCol.favorite{
+  background: #AAA;
+}
+
+.slider-wrapper{
+  width: 100%;
+  padding: 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search{
+  height: fit-content;
+}

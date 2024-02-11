@@ -1,0 +1,85 @@
+<div class="mat-elevation-z8 tableElement">
+  <div class="slider-wrapper">
+    <mat-slide-toggle class="slider" (change)="toggleDisplayFavoriteCoins()"
+      >Show Favorite Only</mat-slide-toggle
+    >
+    <mat-form-field class="search">
+      <input matInput (keyup)="filterCoins($event)" placeholder="Search" />
+    </mat-form-field>
+  </div>
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableCol">
+        Id
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let data"
+        class="tableCol"
+        [class.favorite]="isFavoriteCoin(data)"
+        (click)="toggleFavoriteCoin(data)"
+      >
+        {{ data.id }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableCol">
+        Name
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let data"
+        class="tableCol"
+        [ngClass]="isFavoriteCoin(data) ? 'favorite' : ''"
+        (click)="toggleFavoriteCoin(data)"
+      >
+        {{ data.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableCol">
+        Symbol
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let data"
+        class="tableCol"
+        [ngClass]="isFavoriteCoin(data) ? 'favorite' : ''"
+        (click)="toggleFavoriteCoin(data)"
+      >
+        {{ data.symbol }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableCol">
+        Actions
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let data"
+        class="tableCol"
+        [ngClass]="isFavoriteCoin(data) ? 'favorite' : ''"
+      >
+        <button mat-button (click)="inspectCoin(data)">Inspect</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div>
+    <mat-paginator
+      #paginator
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</div>
