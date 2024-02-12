@@ -48,13 +48,6 @@ export class CoinSelectTableComponent implements AfterViewInit {
           maxHeight: '90vh'
         })
       })
-      // const dialogRef = this.dialog.open(CoinDetailDialog, {
-      //   data: {
-      //     coin,
-      //     // coincoinPricing,
-      //     coinDetails: details
-      //   },
-      // })
     });
   }
 
@@ -79,29 +72,20 @@ export class CoinSelectTableComponent implements AfterViewInit {
   toggleDisplayFavoriteCoins(){
     if (this.isFavoriteCoinsDisplayed) {
       this.isFavoriteCoinsDisplayed = false;
-      // Use MatTableDataSource to wrap your data
       this.dataSource = new MatTableDataSource<CoinBasicInfo>(this.response);
     } else {
       this.isFavoriteCoinsDisplayed = true;
-      // Use MatTableDataSource to wrap your data
       this.dataSource = new MatTableDataSource<CoinBasicInfo>(this.favorites);
     }
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
-
-    // this.dataSource = new CoinSelectTableDataSource(this.favorites);
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
-    // this.table.dataSource = this.dataSource;
   }
 
   ngOnInit(){
     this.favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
   }
-
-
 
   ngAfterViewInit(): void {
     this.dataSource = new MatTableDataSource<CoinBasicInfo>(this.response);

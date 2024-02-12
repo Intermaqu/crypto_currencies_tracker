@@ -21,7 +21,7 @@ export class AppComponent {
     this.cryptoApiService.getAllCoins().subscribe((response) => {
       this.response = response;
       this.isLoaded = true;
-      console.log(this.response);
+      // console.log(this.response);
     }, (error) => {
       this.response = [];
       console.error(error);

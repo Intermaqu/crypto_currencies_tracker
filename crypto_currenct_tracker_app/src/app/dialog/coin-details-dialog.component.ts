@@ -23,6 +23,7 @@ export class CoinDetailDialog {
     coinDetails: any = {}
     coinPricing: any = {}
     pricing: any = []
+    beforeFilterPricing: any = []
     isLoaded: boolean = false
     period: "hour" | "day" = "hour"
     chart: any;    
@@ -30,28 +31,28 @@ export class CoinDetailDialog {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any
     ){
-        // console.log(data)
 
         this.coin = data.coin;
         this.coinDetails = data.coinDetails
         this.coinPricing = data.coinPricing
-        console.log(this.coinDetails)
-        console.log(this.coinPricing)
+        // console.log(this.coinDetails)
+        // console.log(this.coinPricing)
 
         this.pricing = data.coinPricing.prices.map((price:[number, number])=> {
             return {x: timestampToDate(price[0]), y: price[1]}})
         
-        // for(let i = 0; i < data.length; i++){
-        //     this.pricing.push({x: new Date(this.coinPricing.prices[i][0]), y: Number(this.coinPricing.prices[i][1]) });
-        //   }
+        this.beforeFilterPricing = this.pricing
 
         this.isLoaded = true
-
-        // console.log(this.pricing)
     }
 
     setPeriod(period: "hour" | "day"){
         this.period = period
+        if(period === "hour"){
+            this.pricing = this.beforeFilterPricing.slice(-12)
+        } else {
+            this.pricing = this.beforeFilterPricing
+        }
     }
 
 
