@@ -24,6 +24,7 @@ export class CoinSelectTableComponent implements AfterViewInit {
   favorites: CoinBasicInfo[] = [];
   isFavoriteCoinsDisplayed: boolean = false;
   displayedColumns = ['id', 'name', "symbol", "actions"];
+  inspectedCoinData: any = {}
   
   constructor(public dialog: MatDialog, private cryptoApiService: CryptoApiService){
   }
@@ -33,24 +34,31 @@ export class CoinSelectTableComponent implements AfterViewInit {
   }
 
   inspectCoin(coin: CoinBasicInfo){
-    console.log("INSPECTING:", coin);
-  
+
     this.cryptoApiService.getCoinDetails(coin.id).subscribe((coinDetails: any) => {
       console.log("COIN DETAILS:", coinDetails);
-      const dialogRef = this.dialog.open(CoinDetailDialog, {
-        data: coin
+
+      this.cryptoApiService.getCoinMarketData(coin.id).subscribe((coinPricing) => {
+        const dialogRef = this.dialog.open(CoinDetailDialog, {
+          data: {
+            coin,
+            coinPricing,
+            coinDetails
+          },
+          maxHeight: '90vh'
+        })
       })
-
-      // dialogRef.afterClosed().subscribe((result: any) => {
-      //   console.log(`Dialog result: ${result}`);
-      // });
+      // const dialogRef = this.dialog.open(CoinDetailDialog, {
+      //   data: {
+      //     coin,
+      //     // coincoinPricing,
+      //     coinDetails: details
+      //   },
+      // })
     });
-
   }
 
   filterCoins(event: Event){
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-  
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log("FILTERING:", filterValue);

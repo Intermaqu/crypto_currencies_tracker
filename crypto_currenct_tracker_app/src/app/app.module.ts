@@ -14,6 +14,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 // import { }
 
@@ -34,7 +35,8 @@ import { MatInputModule } from '@angular/material/input';
     MatSlideToggleModule,
     MatDialogModule,
     MatFormFieldModule, 
-    MatInputModule
+    MatInputModule,
+    CanvasJSAngularChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

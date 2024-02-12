@@ -1,0 +1,11 @@
+.modal-wrapper{
+    min-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-buttons{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
